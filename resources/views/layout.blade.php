@@ -102,16 +102,31 @@
         @yield('content')
     </main>
 
-    <footer class="">
-        The Footer
+    <footer class="py-4">
+        <ul class="links flex gap-4 justify-center items-center flex-col text-xs md:flex-row md:py-8 md:justify-between">
+            <li>
+                <a href="#" class="text-gray-500 hover:underline hover:text-blue-500">Privacy Policy</a>
+            </li>
+            <li>
+                <a href="#" class="text-gray-500 hover:underline hover:text-blue-500">About</a>
+            </li>
+            <li class=" text-gray-500">
+                © <span id="year"></span> Baithak Communication Pvt Ltd
+            </li>
+            <li>
+                <a href="#" class="text-gray-500 hover:underline hover:text-blue-500">Contact</a>
+            </li>
+            <li>
+                <a href="#" class="text-gray-500 hover:underline hover:text-blue-500">Terms & Conditions</a>
+            </li>
+        </ul>
     </footer>
     <script>
-
         // Theme related stuff
         let theme = localStorage.getItem('theme') || "light";
         const moons = document.querySelectorAll('.moon');
         const suns = document.querySelectorAll('.sun');
-    
+
         function setTheme(theme) {
             if (theme == 'dark') {
                 document.body.classList.add('dark');
@@ -151,13 +166,17 @@
             }
             setTheme(theme);
         }
-    
-    
-      // Hamburger and sidebar related stuff
-      const mobileSidebar = document.querySelector('.mobile_sidebar');
-      function toggleHamburger(){
+
+
+        // Hamburger and sidebar related stuff
+        const mobileSidebar = document.querySelector('.mobile_sidebar');
+        function toggleHamburger(){
         mobileSidebar.classList.toggle('hidden');
-      }
+        }
+        // Footer current year
+        const yearSlot = document.querySelector('#year');
+        const currentYear = new Date().getFullYear();
+        yearSlot.innerText = currentYear;
     
     </script>
     
