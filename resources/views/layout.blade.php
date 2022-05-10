@@ -104,17 +104,17 @@
 
     <footer class="py-4">
         <ul class="links flex gap-4 justify-center items-center flex-col text-xs md:flex-row md:py-8 md:justify-between">
-            <li>
-                <a href="#" class="text-gray-500 hover:underline hover:text-blue-500">Privacy Policy</a>
-            </li>
-            <li>
-                <a href="#" class="text-gray-500 hover:underline hover:text-blue-500">About</a>
-            </li>
             <li class=" text-gray-500">
                 © <span id="year"></span> Baithak Communication Pvt Ltd
             </li>
             <li>
+                <a href="#" class="text-gray-500 hover:underline hover:text-blue-500">About</a>
+            </li>
+            <li>
                 <a href="#" class="text-gray-500 hover:underline hover:text-blue-500">Contact</a>
+            </li>
+            <li>
+                <a href="#" class="text-gray-500 hover:underline hover:text-blue-500">Privacy Policy</a>
             </li>
             <li>
                 <a href="#" class="text-gray-500 hover:underline hover:text-blue-500">Terms & Conditions</a>
