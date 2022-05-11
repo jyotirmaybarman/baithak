@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<section class="">
+  <section class="">
     <div class="flex py-24 lg:flex-row flex-col items-center justify-center lg:gap-16 xl:gap-48">
       <div class="text-center lg:text-left">
         <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium mt-12">Welcome to बैठक !!</h1>
@@ -16,7 +16,7 @@
                 </span>
             </a>
             <span>OR</span>
-            <a href="#" class="hover:bg-gray-300 dark:hover:bg-[#494949] flex gap-4 p-4 rounded border dark:bg-[#333] dark:border-[#333]">Join a meeting</a>
+            <a onclick="openModal()" id="join_meeting_btn" href="#" class="hover:bg-gray-300 dark:hover:bg-[#494949] flex gap-4 p-4 rounded border dark:bg-[#333] dark:border-[#333]">Join a meeting</a>
         </div>
       </div>
       <div class="hidden lg:block lg:max-w-sm lg:w-full md:w-1/2 w-5/6  rounded-full">
@@ -67,9 +67,30 @@
           <path d="M163.067 85.8319H149.667C147.167 85.8319 145.167 83.8319 145.167 81.3319V66.7319C145.167 64.2319 147.167 62.2319 149.667 62.2319H163.067C165.567 62.2319 167.567 64.2319 167.567 66.7319V81.3319C167.567 83.8319 165.567 85.8319 163.067 85.8319Z" stroke="#202124" stroke-width="0.75" stroke-miterlimit="10"/>
           <path d="M138.768 74.2318C140.368 72.5318 143.068 73.1318 144.768 74.3318C145.168 74.6318 145.568 73.9318 145.168 73.7318C143.168 72.4318 140.068 71.9318 138.268 73.8318C137.868 74.0318 138.368 74.5318 138.768 74.2318Z" fill="#202124"/>
         </svg>
-          
-          
+      </div> 
+      <div id="join_modal" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 bg-[#000000bb] left-0 right-0 place-content-center z-50 w-full h-modal h-full">
+        <div class="relative p-8 w-full text-center md:w-[500px]  md:h-[300px] justify-center bg-gray-100 dark:bg-[#222] flex flex-col rounded">
+          <button onclick="closeModal()" id="close_modal_btn" class="absolute top-5 right-5">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <p class="uppercase font-bold">Enter the meeting code</p>
+          <input class="px-2 py-3 uppercase border border-gray-300 dark:border-[#333] dark:bg-[#2c2c2c] mt-10 rounded outline-[#1f1f1f]" placeholder="ABZB6Y9Q256W" type="text">
+          <button class="bg-blue-500 uppercase text-white hover:bg-blue-600 p-3 mt-7 rounded">Join</button>
+        </div>
       </div>
     </div>
   </section>
+  <script>
+    const joinModal = document.querySelector('#join_modal');
+    function openModal(){
+      joinModal.classList.remove('hidden');
+      joinModal.classList.add('grid');
+    }
+    function closeModal(){
+      joinModal.classList.add('hidden');
+    }
+
+  </script>
 @endsection
