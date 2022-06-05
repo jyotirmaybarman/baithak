@@ -33,18 +33,33 @@
                 </li>
             </ul>
         </div>
-        <button onclick="toggleTheme()"
-            class="hidden lg:block rounded-md p-2 border border-[#acacac] dark:border-[#333] hover:bg-gray-300 cursor-pointer text-black dark:text-white dark:hover:bg-[#3d3d3d]">
-            <svg class="sun h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
-                </path>
-            </svg>
-            <svg class="moon h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-            </svg>
-        </button>
+        <div class="flex items-center">
+            <div class="mr-8 relative">
+                @if(Auth::check())
+                    <button id="username" class="author block hover:underline">
+                        {{ Auth::user()->name }}
+                    </button>
+                    <form id="logout_form" class="absolute hidden w-full mt-2" action="/logout" method="POST">
+                        @csrf
+                        <button type="submit" class="p-2 block rounded border dark:border-gray-500 dark:hover:bg-[#333] hover:bg-gray-300 text-center w-full" >Logout</button>
+                    </form>
+                @else
+                    <a class="block hover:underline" href="/login">Login</a>
+                @endif
+            </div>
+            <button onclick="toggleTheme()"
+                class="hidden lg:block rounded-md p-2 border border-[#acacac] dark:border-[#333] hover:bg-gray-300 cursor-pointer text-black dark:text-white dark:hover:bg-[#3d3d3d]">
+                <svg class="sun h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                    </path>
+                </svg>
+                <svg class="moon h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
+        </div>
         <button onclick="toggleHamburger()" class="hamburger lg:hidden">
             <svg class="h-7 w-7" viewBox="0 0 123 96" fill="none">
                 <g>
@@ -122,6 +137,15 @@
         </ul>
     </footer>
     <script>
+        // Logout related stuff
+        const username = document.querySelector('#username');
+        const logout_form = document.querySelector('#logout_form');
+        if(username){
+            username.addEventListener('click', ()=> {
+                logout_form.classList.toggle('hidden');
+            });
+        }
+
         // Theme related stuff
         let theme = localStorage.getItem('theme') || "light";
         const moons = document.querySelectorAll('.moon');
