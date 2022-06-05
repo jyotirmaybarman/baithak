@@ -51,6 +51,10 @@
                     {{ __('Log in') }}
                 </x-button>
             </div>
+            <div class="text-sm">
+                <p class="text-center my-4">OR</p>
+                <p class="text-center"><span class="mr-4">Don't have any account ?</span> <a class="text-blue-500 hover:text-blue-600 hover:underline" href="/register">Register Here</a></p>
+            </div>
         </form>
     </x-auth-card>
 </x-guest-layout>
