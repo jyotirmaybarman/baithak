@@ -25,5 +25,5 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::get('/get-token', [MeetingController::class, 'getToken']);
-Route::post('/create-meeting', [MeetingController::class, 'createMeeting']);
+Route::get('/meeting', [MeetingController::class, 'createMeeting']);
 Route::post('/validate-meeting/{id}', [MeetingController::class, 'validateMeeting']);

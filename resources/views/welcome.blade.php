@@ -6,9 +6,8 @@
       <div class="text-center lg:text-left">
         <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium mt-12">Welcome to बैठक !!</h1>
         <p class="mb-8 leading-relaxed text-gray-500 dark:text-gray-300">The most simple and secure medium for your e-meetings</p>
-        <form action="/create-meeting" method="POST" class="flex flex-col lg:flex-row gap-12 mt-12 items-center">
-            @csrf
-            <button class="flex gap-4 p-4 rounded bg-blue-500 hover:bg-blue-700 text-white">
+        <div class="flex flex-col lg:flex-row gap-12 mt-12 items-center">
+            <button onclick="createMeeting()" class="flex gap-4 p-4 rounded bg-blue-500 hover:bg-blue-700 text-white">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                 </svg>
@@ -18,7 +17,7 @@
             </button>
             <span>OR</span>
             <a onclick="openModal()" id="join_meeting_btn" href="#" class="hover:bg-gray-300 dark:hover:bg-[#494949] flex gap-4 p-4 rounded border dark:bg-[#333] dark:border-[#333]">Join a meeting</a>
-        </form>
+        </div>
       </div>
       <div class="hidden lg:block lg:max-w-sm lg:w-full md:w-1/2 w-5/6  rounded-full">
         <svg class="h-full w-full rounded-full border border-gray-200 dark:border-[#333]" viewBox="0 0 300 300" fill="none">
@@ -77,8 +76,8 @@
             </svg>
           </button>
           <p class="uppercase font-bold">Enter the meeting code</p>
-          <input class="px-2 py-3 uppercase border border-gray-300 dark:border-[#333] dark:bg-[#2c2c2c] mt-10 rounded outline-[#1f1f1f]" placeholder="ABZB6Y9Q256W" type="text">
-          <button class="bg-blue-500 uppercase text-white hover:bg-blue-600 p-3 mt-7 rounded">Join</button>
+          <input id="joinCode" class="px-2 py-3 uppercase border border-gray-300 dark:border-[#333] dark:bg-[#2c2c2c] mt-10 rounded outline-[#1f1f1f]" placeholder="ABZB6Y9Q256W" type="text">
+          <button onclick="joinMeeting()" class="bg-blue-500 uppercase text-white hover:bg-blue-600 p-3 mt-7 rounded">Join</button>
         </div>
       </div>
     </div>
@@ -91,6 +90,21 @@
     }
     function closeModal(){
       joinModal.classList.add('hidden');
+    }
+
+    function createMeeting() {
+      let meetingId =  'xxxxyxxx'.replace(/[xy]/g, function(c) {
+          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+      });
+      window.location.href = "http://"+window.location.host+"/meeting"+"?id="+meetingId;
+    }
+
+    function joinMeeting(){
+      console.log("here");
+      const joinCode = document.querySelector("#joinCode").value;
+      console.log(joinCode);
+      window.location.href = "http://"+window.location.host+"/meeting"+"?id="+joinCode;
     }
 
   </script>
