@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MeetingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::get('/get-token', [MeetingController::class, 'getToken']);
+Route::post('/create-meeting', [MeetingController::class, 'createMeeting']);
+Route::post('/validate-meeting/{id}', [MeetingController::class, 'validateMeeting']);

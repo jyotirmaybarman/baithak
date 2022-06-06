@@ -1,11 +1,15 @@
 @extends('layout')
 
 @section('content')
+<input value="{{ $response }}" id="response" class="hidden">
+<input value="{{ $token }}" id="token" class="hidden">
+<input type="text" value="" name="" id="meetingIdBox" class="bg-transparent border p-2 pointer-events-none mb-4">
 <div class="flex gap-8">
     <div class="left w-[75%] h-[800px] felx flex-col justify-between items-between">
         <div class="top h-[90%] grid grid-cols-3">
             <div class="group cursor-pointer relative flex justify-center items-center h-[360px] w-[360px]">
-                <img class="block h-full w-full object-center" src="https://randomuser.me/api/portraits/men/89.jpg" alt="">
+                {{-- <img class="block h-full w-full object-center" src="https://randomuser.me/api/portraits/men/89.jpg" alt=""> --}}
+                <video class="block h-[360px] w-[360px]"  autoplay="true" id="videoElement"> </video>
                 <div class="hidden group-hover:flex absolute left-5 top-5 actions gap-4">
                     <button class="p-3 bg-gray-100 rounded hover:bg-gray-300 dark:bg-[#464646] dark:hover:bg-[#333]">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -25,7 +29,7 @@
                 </button>
                 <p class="hidden group-hover:block absolute bottom-5 right-5 px-3 py-2 text-sm rounded-lg bg-gray-100 dark:bg-[#464646]">Jake Paul</p>
             </div>
-            <div class="group cursor-pointer relative flex justify-center items-center h-[360px] w-[360px]">
+            {{-- <div class="group cursor-pointer relative flex justify-center items-center h-[360px] w-[360px]">
                 <img class="block h-full w-full object-center" src="https://randomuser.me/api/portraits/men/98.jpg" alt="">
                 <div class="hidden group-hover:flex absolute left-5 top-5 actions gap-4">
                     <button class="p-3 bg-gray-100 rounded hover:bg-gray-300 dark:bg-[#464646] dark:hover:bg-[#333]">
@@ -129,8 +133,11 @@
                     </svg>  
                 </button>
                 <p class="hidden group-hover:block absolute bottom-5 right-5 px-3 py-2 text-sm rounded-lg bg-gray-100 dark:bg-[#464646]">Jake Paul</p>
-            </div>
+            </div> --}}
 
+            {{-- <div id="videoContainer" class="">
+                <video autoplay="true" id="videoElement"> </video>
+            </div> --}}
         </div>
         <div class="bottom h-[8%] mt-[1%] flex flex-col items-center justify-center">
             <div class="flex gap-4">
@@ -196,4 +203,48 @@
         </div>
     </div>
 </div>
+<script src="https://sdk.videosdk.live/js-sdk/0.0.20/videosdk.js"></script>
+<script>
+    let response = document.querySelector('#response');
+    let token = document.querySelector('#token');
+    response = JSON.parse(response.value); 
+    // console.log(response);
+    const meetingId = response.meetingId
+    const meetingIdBox = document.querySelector('#meetingIdBox');
+    meetingIdBox.value = meetingId;
+
+    // console.log(window.VideoSDK);
+    window.VideoSDK.config(token);
+    
+    // Initilize meeting
+    const meeting = VideoSDK.initMeeting({
+        meetingId: meetingId, // required
+        name: "Jyotirmay", // required
+        participantId:response.id // optional, default: SDK will generate
+        // micEnabled: "<Flag-to-enable-mic>", // optional, default: true
+        // webcamEnabled: "<Flag-to-enable-webcam>", // optional, default: true
+        // maxResolution: "<Maximum-resolution>", // optional, default: "hd"
+    });
+    const onPress = () => {
+        // Joining Meeting
+        meeting?.join();
+    };
+    
+    onPress();
+    console.log(meeting);
+    
+    let video = document.querySelector("#videoElement");
+    navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true,
+    }).then((stream) => {
+        // console.log(stream);
+        video.srcObject = stream;
+        video.play();
+    });
+
+
+
+
+</script>
 @endsection
